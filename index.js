@@ -10,6 +10,9 @@ const app = express();
 //configurar cors
 app.use(cors());
 
+//lectura body
+app.use(express.json());
+
 /*
 mean_user
 july2803
@@ -18,12 +21,9 @@ july2803
 dbConnection();
 
 //rutas
-app.get( '/', (req, resp) => {
-    resp.json({
-        ok: true,
-        msg: 'hola mundo'
-    })
-});
+app.use('/api/usuarios', require('./routes/usuarios') );
+app.use('/api/login', require('./routes/auth') );
+
 
 app.listen(process.env.PORT, () => {
     console.log('servidor ocrriendo en puerto: ' + process.env.PORT)
